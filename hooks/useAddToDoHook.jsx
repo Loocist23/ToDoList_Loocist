@@ -1,17 +1,25 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid'; // Assurez-vous d'installer uuid avec npm ou yarn
 
 const useAddToDoHook = () => {
-    const [todos, setTodos] = useState([]); // État pour stocker la liste des tâches
-    const [newTodo, setNewTodo] = useState(''); // État pour stocker la nouvelle tâche à ajouter
+    const [todos, setTodos] = useState([]);
+    const [newTodoTitle, setNewTodoTitle] = useState('');
+    const [newTodoDescription, setNewTodoDescription] = useState('');
 
     const addTodo = () => {
-        if (newTodo.trim() !== '') {
-            setTodos([...todos, newTodo]); // Ajoute la nouvelle tâche à la liste
-            setNewTodo(''); // Réinitialise l'entrée de la nouvelle tâche
+        if (newTodoTitle.trim() !== '') {
+            const newTodo = {
+                id: uuidv4(),
+                title: newTodoTitle,
+                description: newTodoDescription,
+            };
+            setTodos([...todos, newTodo]);
+            setNewTodoTitle('');
+            setNewTodoDescription('');
         }
     };
 
-    return { todos, newTodo, setNewTodo, addTodo };
+    return { todos, setNewTodoTitle, setNewTodoDescription, addTodo };
 };
 
 export default useAddToDoHook;

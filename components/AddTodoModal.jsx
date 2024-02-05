@@ -1,8 +1,26 @@
-import React from 'react';
+// AddTodoModal.js
+import React, { useState } from 'react';
 import { Modal, View, TouchableOpacity, StyleSheet, Text } from 'react-native';
 import TodoInputButton from './TodoInputButton';
 
-const AddTodoModal = ({ isVisible, onClose, newTodo, setNewTodo, addTodo }) => {
+const AddTodoModal = ({ isVisible, onClose, addTodo }) => {
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+
+    const handleAddTodo = () => {
+        console.log('Title:', title); // Ajout d'un console.log pour le titre
+        console.log('Description:', description); // Ajout d'un console.log pour la description
+        addTodo({
+            title,
+            description,
+            // Vous pouvez ajouter un ID unique ici si nécessaire
+            
+        });
+        setTitle(''); // Réinitialisez le titre
+        setDescription(''); // Réinitialisez la description
+        onClose();
+    };
+
     return (
         <Modal
             animationType="slide"
@@ -15,12 +33,11 @@ const AddTodoModal = ({ isVisible, onClose, newTodo, setNewTodo, addTodo }) => {
                     <Text>Close</Text>
                 </TouchableOpacity>
                 <TodoInputButton
-                    newTodo={newTodo}
-                    setNewTodo={setNewTodo}
-                    addTodo={() => {
-                        addTodo();
-                        onClose();
-                    }}
+                    title={title} // Passez le titre
+                    setTitle={setTitle} // Passez la fonction pour mettre à jour le titre
+                    description={description} // Passez la description
+                    setDescription={setDescription} // Passez la fonction pour mettre à jour la description
+                    addTodo={handleAddTodo}
                 />
             </View>
         </Modal>
