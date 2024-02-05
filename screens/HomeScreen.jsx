@@ -19,7 +19,8 @@ const HomeScreen = () => {
             </TouchableOpacity>
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 {todos.map((todo, index) => (
-                    <ToDoCard key={index} todo={todo} onPress={() => openDetailsModal(todo)} />
+                    // log the todo to see the structure
+                    <ToDoCard key={todo.id} todo={todo} onPress={() => openDetailsModal(todo)} />
                 ))}
             </ScrollView>
 
@@ -34,11 +35,12 @@ const HomeScreen = () => {
             {selectedTodo && (
                 <TodoDetailsModal
                     isVisible={isDetailsModalVisible}
-                    onClose={() => openDetailsModal(null)} // Pour fermer la modal, passez null à openDetailsModal
+                    onClose={() => openDetailsModal(null)} // Pour fermer la modal
                     todo={selectedTodo}
-                    onDelete={deleteTodo}
+                    onDelete={() => deleteTodo(selectedTodo.id)} // Appel de deleteTodo avec l'ID du todo sélectionné
                     onEdit={editTodo}
                 />
+
             )}
         </View>
     );

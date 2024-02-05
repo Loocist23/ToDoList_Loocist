@@ -8,18 +8,12 @@ const AddTodoModal = ({ isVisible, onClose, addTodo }) => {
     const [description, setDescription] = useState('');
 
     const handleAddTodo = () => {
-        console.log('Title:', title); // Ajout d'un console.log pour le titre
-        console.log('Description:', description); // Ajout d'un console.log pour la description
-        addTodo({
-            title,
-            description,
-            // Vous pouvez ajouter un ID unique ici si nécessaire
-            
-        });
-        setTitle(''); // Réinitialisez le titre
-        setDescription(''); // Réinitialisez la description
+        addTodo(title, description); // Assurez-vous que addTodo accepte le titre et la description comme paramètres
+        setTitle('');
+        setDescription('');
         onClose();
     };
+    
 
     return (
         <Modal

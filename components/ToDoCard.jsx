@@ -6,6 +6,16 @@ import Checkbox from './CheckBox';
 const ToDoCard = ({ todo, onPress }) => {
     const [isSelected, setSelection] = useState(false);
 
+    const truncateText = (text, maxLength) => {
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength) + '...';
+        }
+        return text;
+    };
+
+    const truncatedTitle = truncateText(todo.title, 30); // Tronque à 30 caractères pour le titre
+    const truncatedDescription = truncateText(todo.description, 60); // Tronque à 60 caractères pour la description
+
     return (
         <TouchableOpacity onPress={onPress} style={styles.card}>
             <Checkbox
@@ -13,9 +23,9 @@ const ToDoCard = ({ todo, onPress }) => {
                 onCheckChange={setSelection}
             />
             <View style={styles.todoInfo}>
-                <Text style={styles.todoTitle}>{todo.title}</Text>
+                <Text style={styles.todoTitle}>{truncatedTitle}</Text>
                 {todo.description && (
-                    <Text style={styles.todoDescription}>{todo.description}</Text>
+                    <Text style={styles.todoDescription}>{truncatedDescription}</Text>
                 )}
             </View>
         </TouchableOpacity>
@@ -43,6 +53,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 5,
+        marginLeft: 5,
     },
     todoDescription: {
         fontSize: 16,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, View, Text, Button, StyleSheet } from 'react-native';
+import { Modal, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 const TodoDetailsModal = ({ isVisible, onClose, todo, onEdit, onDelete }) => {
     return (
@@ -10,10 +10,17 @@ const TodoDetailsModal = ({ isVisible, onClose, todo, onEdit, onDelete }) => {
             onRequestClose={onClose}>
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <Text style={styles.modalText}>Détail: {todo.text}</Text>
-                    <Button title="Modifier" onPress={() => onEdit(todo.id)} />
-                    <Button title="Supprimer" onPress={() => onDelete(todo.id)} />
-                    <Button title="Fermer" onPress={onClose} />
+                    <Text style={styles.modalText}>Title: {todo.title}</Text>
+                    <Text style={styles.modalText}>Description: {todo.description || "Vide"}</Text>
+                    <TouchableOpacity style={styles.button} onPress={() => onEdit(todo.id)}>
+                        <Text style={styles.buttonText}>Modifier</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => onDelete(todo.id)}>
+                        <Text style={styles.buttonText}>Supprimer</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={onClose}>
+                        <Text style={styles.buttonText}>Fermer</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>
@@ -45,6 +52,18 @@ const styles = StyleSheet.create({
     modalText: {
         marginBottom: 15,
         textAlign: "center"
+    },
+    button: {
+        backgroundColor: "#2196F3",
+        borderRadius: 10,
+        padding: 10,
+        marginVertical: 10,
+        width: 100,
+        alignItems: "center"
+    },
+    buttonText: {
+        color: "white",
+        fontWeight: "bold"
     }
 });
 
