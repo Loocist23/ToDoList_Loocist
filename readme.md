@@ -30,17 +30,22 @@ git clone https://github.com/Loocist23/ToDoList_Loocist.git
 
 ## Installez les dépendances :
 
+```
 cd your-project-directory
 npm install
-Lancez l'application :
-Pour iOS :
-bash
-Copy code
+```
+
+## Lancez l'application :
+### Pour iOS :
+`
 npx react-native run-ios
-Pour Android :
-bash
-Copy code
+`
+
+### Pour Android :
+`
 npx react-native run-android
+`
+
 Utilisation
 Ajouter une tâche
 Appuyez sur le bouton "Add a new todo".
