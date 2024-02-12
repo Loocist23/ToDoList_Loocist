@@ -28,42 +28,47 @@ Pour installer et lancer le projet sur votre machine locale, suivez ces étapes 
 git clone https://github.com/Loocist23/ToDoList_Loocist.git
 ```
 
-## Installez les dépendances :
+2. Installez les dépendances :
 
 ```
-cd your-project-directory
+cd ToDoList_Loocist
 npm install
 ```
 
-## Lancez l'application :
-### Pour iOS :
-```
-npx react-native run-ios
-```
 
-### Pour Android :
-```
-npx react-native run-android
-```
+3. Lancez l'application :
+- Pour iOS :
+  ```
+  npx react-native run-ios
+  ```
+- Pour Android :
+  ```
+  npx react-native run-android
+  ```
 
 ## Utilisation
+
 ### Ajouter une tâche
 
 - Appuyez sur le bouton "Add a new todo".
 - Remplissez les champs "Title", "Description" et sélectionnez une "Due Date".
 - Appuyez sur "Add" pour enregistrer la tâche.
-- Modifier/Supprimer une tâche
+
+### Modifier/Supprimer une tâche
+
 - Appuyez sur une tâche pour ouvrir les détails.
 - Pour modifier, changez les informations et appuyez sur "Save".
 - Pour supprimer, appuyez sur "Delete".
 
-
 ### Changer le thème
+
 - Allez dans l'onglet "Settings".
 - Utilisez le commutateur pour basculer entre les thèmes clair et sombre.
 
 ## Contribution
+
 Si vous souhaitez contribuer à ce projet, n'hésitez pas à forker le dépôt et à soumettre des pull requests.
 
 ## Licence
-MIT
+
+[MIT](https://opensource.org/licenses/MIT)
