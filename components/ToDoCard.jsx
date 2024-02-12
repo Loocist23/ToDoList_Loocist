@@ -1,10 +1,11 @@
-// ToDoCard.js
-import React, { useState } from 'react';
+//ToDoCard.jsx
+import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View } from 'react-native';
 import Checkbox from './CheckBox';
+import { useSettings } from '../context/SettingContext';
 
-const ToDoCard = ({ todo, onPress }) => {
-    const [isSelected, setSelection] = useState(false);
+const ToDoCard = ({ todo, onPress, onToggleCompletion }) => {
+    const { completedTodoTextColor, isDarkMode } = useSettings();
 
     const truncateText = (text, maxLength) => {
         if (text.length > maxLength) {
@@ -13,19 +14,35 @@ const ToDoCard = ({ todo, onPress }) => {
         return text;
     };
 
-    const truncatedTitle = truncateText(todo.title, 30); // Tronque à 30 caractères pour le titre
-    const truncatedDescription = truncateText(todo.description, 60); // Tronque à 60 caractères pour la description
+    const truncatedTitle = truncateText(todo.title, 30);
+    const truncatedDescription = truncateText(todo.description, 60);
+
+    const dynamicStyles = StyleSheet.create({
+        card: {
+            backgroundColor: isDarkMode ? '#333' : '#fff',
+        },
+        todoTitle: {
+            color: todo.isCompleted ? completedTodoTextColor : isDarkMode ? '#fff' : '#000',
+        },
+        todoDescription: {
+            color: isDarkMode ? '#ddd' : 'grey',
+        }
+    });
 
     return (
-        <TouchableOpacity onPress={onPress} style={styles.card}>
+        <TouchableOpacity onPress={onPress} style={[styles.card, dynamicStyles.card]}>
             <Checkbox
-                isChecked={isSelected}
-                onCheckChange={setSelection}
+                isChecked={todo.isCompleted}
+                onCheckChange={() => onToggleCompletion(todo.id)}
             />
             <View style={styles.todoInfo}>
-                <Text style={styles.todoTitle}>{truncatedTitle}</Text>
+                <Text style={[styles.todoTitle, dynamicStyles.todoTitle]}>
+                    {truncatedTitle}
+                </Text>
                 {todo.description && (
-                    <Text style={styles.todoDescription}>{truncatedDescription}</Text>
+                    <Text style={[styles.todoDescription, dynamicStyles.todoDescription]}>
+                        {truncatedDescription}
+                    </Text>
                 )}
             </View>
         </TouchableOpacity>
@@ -41,7 +58,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'grey',
         borderRadius: 5,
-        backgroundColor: '#fff',
     },
     checkbox: {
         marginRight: 8,
@@ -57,7 +73,6 @@ const styles = StyleSheet.create({
     },
     todoDescription: {
         fontSize: 16,
-        color: 'grey',
     },
 });
 

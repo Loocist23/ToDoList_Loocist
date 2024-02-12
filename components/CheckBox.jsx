@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
+//CheckBox.jsx
+import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 const Checkbox = ({ onCheckChange, isChecked }) => {
-  const [checked, setChecked] = useState(isChecked);
-
-  const toggleCheckbox = () => {
-    const newState = !checked;
-    setChecked(newState);
-    onCheckChange(newState);
-  };
-
   return (
-    <TouchableOpacity onPress={toggleCheckbox} style={styles.checkbox}>
-      {checked && <Text>✔</Text>}
+    <TouchableOpacity onPress={onCheckChange} style={styles.checkbox}>
+      {isChecked && <Text>✔</Text>}
     </TouchableOpacity>
   );
 };
@@ -25,10 +18,6 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  innerCheckbox: {
-    height: 10,
-    width: 10
   },
 });
 

@@ -1,3 +1,4 @@
+//useTodoActions.jsx
 import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -5,6 +6,7 @@ const useTodoActions = () => {
     const [todos, setTodos] = useState([]);
     const [selectedTodo, setSelectedTodo] = useState(null);
     const [isDetailsModalVisible, setIsDetailsModalVisible] = useState(false);
+    
 
     useEffect(() => {
         const loadTodos = async () => {
@@ -13,19 +15,14 @@ const useTodoActions = () => {
         };
 
         loadTodos();
-    }, []);
-
-    useEffect(() => {
-        console.log(todos); // Pour voir les todos actuels après chaque mise à jour
-    }, [todos]);
-    
+    }, []);    
 
     const openDetailsModal = (todo) => {
         setSelectedTodo(todo);
         setIsDetailsModalVisible(true);
     };
 
-    const deleteTodo = async (todoId) => {
+    const deleteTodo = async (todoId, refresh) => {
         const updatedTodos = todos.filter(todo => todo.id !== todoId);
         console.log(updatedTodos); // Pour voir les todos après la suppression
         setTodos(updatedTodos);
@@ -34,6 +31,7 @@ const useTodoActions = () => {
         } catch (error) {
             console.log(error);
         }
+        setRefresh(!refresh);
         setIsDetailsModalVisible(false);
     };
 
